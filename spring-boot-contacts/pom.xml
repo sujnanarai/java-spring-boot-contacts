@@ -38,12 +38,18 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+		<plugins> 
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- This is to fix org.apache.maven.plugins:maven-surefire-plugin error-->
+			<plugin>
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <version>3.0.0-M1</version>
+			 </plugin>
 		</plugins>
+		
 	</build>
 
 
