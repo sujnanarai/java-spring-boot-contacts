@@ -2,7 +2,7 @@
 node {
     stage('checkout') {
         //git branch: 'release', url: 'https://github.com/sujnanarai/java-spring-boot-contacts.git'
-        chckout scm
+        checkout scm
     }
     def projectPath = "spring-boot-contacts/"
     dir(projectPath) {
