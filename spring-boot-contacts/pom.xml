@@ -32,11 +32,12 @@
 		</dependency>
 		
 		<!-- This is to tomcat create deployable war -->
+		
 		<dependency>
 		  <groupId>org.springframework.boot</groupId>
-		  <artifactId>spring-boot-starter-test</artifactId>
-		  <scope>test</scope>
-		 </dependency>
+		  <artifactId>spring-boot-starter-tomcat</artifactId>
+		  <scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
