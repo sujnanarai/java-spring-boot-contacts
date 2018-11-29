@@ -31,8 +31,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<!-- This is to tomcat create deployable war -->
-		
+		<!-- This is to tomcat create deployable war -->		
 		<dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-tomcat</artifactId>
