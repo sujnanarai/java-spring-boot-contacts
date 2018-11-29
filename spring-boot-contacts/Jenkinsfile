@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Checkout') { 
             steps { 
-               git branch: 'release-war', url: 'https://github.com/sujnanarai/java-spring-boot-contacts.git'
+               //git branch: 'release-war', url: 'https://github.com/sujnanarai/java-spring-boot-contacts.git'
+               checkout scm
             }
         }
 		stage('Packaging'){
