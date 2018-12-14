@@ -1,7 +1,7 @@
 node {
   
     def projectPath = "spring-boot-contacts/"
-    
+    def EC2_HOST = "ubuntu@13.232.81.89"
     stage ("SCM Checkout") {
     	 checkout scm
          //git branch: 'release-war', 
@@ -51,83 +51,10 @@ node {
 	stage ('Run docker container') {
 	    def dockerRun = 'docker run -p 8080:8080 -d --name sprning-contacts sujnanarai/spring-boot-contacts:1.0.0'
 	    sshagent(['EC2_CREDENTIAL']) {
-            sh "ssh -o StrictHostKeyChecking=no -T ubuntu@13.232.81.89 ${dockerRun}"
+            sh "ssh -o StrictHostKeyChecking=no -T ${EC2_HOST} ${dockerRun}"
         }
 	    
 	}
 }
 
 
-
-
-
-pipeline { 
-   
-    environment {
-            def projectPath = "spring-boot-contacts/"
-    }
-    agent any 
-
-    stages {
-        stage('Checkout') { 
-            steps { 
-               //git branch: 'release-war', url: 'https://github.com/sujnanarai/java-spring-boot-contacts.git'
-               checkout scm
-            }
-        }
-		stage('Packaging'){
-			steps {		
-				dir(projectPath) {
-					sh 'mvn clean package' 	
-				}					
-			}
-		}
-		stage('Publish test results') {
-			steps {	
-				dir(projectPath) {
-					step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/TEST-*.xml'])
-					publishHTML([allowMissing: true, 
-								alwaysLinkToLastBuild: false,
-								keepAll: true, 
-								reportDir: 'target/site/jacoco/', 
-								reportFiles: 'index.html', 
-								reportName: 'Code Coverage Report', 
-								reportTitles: ''])
-				}
-			}
-		}
-		stage('Archival') {
-			steps {	
-				dir(projectPath) {
-					archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
-				}
-			}
-		}  
-		stage('Deployment to Tomcat') {
-			steps {	
-				dir(projectPath) {
-    				withCredentials([usernamePassword(credentialsId: '2203d3db-9bf1-4866-a0a6-248e338bc264', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                          sh 'echo $PASSWORD'
-                          // also available as a Groovy variable
-                          echo USERNAME
-                          // or inside double quotes for string interpolation
-                          echo "username is $USERNAME"
-                          sh 'curl --upload-file target/*.war "http://13.233.105.107:8080/manager/text/deploy?path=/springcontact&update=true" --user $USERNAME:$PASSWORD'
-                    }
-    				/*
-    					sh 'curl -X POST http://my75482dns.eastus2.cloudapp.azure.com:8888/shutdown || true'
-                        // copy file to target location
-                        sh 'cp target/*.jar /tmp/'
-                        // start the application
-                        sh 'echo "nohup nice java -jar /tmp/spring-boot-contacts-0.0.1-SNAPSHOT.jar &"'
-                        // wait for application to respond
-                        sh 'while ! httping -qc1 http://my75482dns.eastus2.cloudapp.azure.com:8888 ; do sleep 1 ; done'
-    			    */
-			    
-			        //sh 'echo "mvn spring-boot:run"'
-			    
-				}
-			}
-		}
-    }
-}
