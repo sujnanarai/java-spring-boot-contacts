@@ -1,7 +1,7 @@
 node {
   
     def projectPath = "spring-boot-contacts/"
-    def EC2_HOST = "ubuntu@13.232.100.170"
+    def EC2_HOST = "ubuntu@13.232.213.70"
     stage ("SCM Checkout") {
     	 checkout scm
          //git branch: 'release-war', 
