@@ -5,17 +5,19 @@ public class Contact {
 	private String firstName;
 	private String lastName;
 	private String phoneNo;
+	private String city;
 	
 	public Contact() {
 		
 	}
 	
-	public Contact(String id, String firstName, String lastName, String phoneNo) {
+	public Contact(String id, String firstName, String lastName, String phoneNo, String city) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNo = phoneNo;
+		this.city = city;
 	}
 	
 	
@@ -42,5 +44,13 @@ public class Contact {
 	}
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 }

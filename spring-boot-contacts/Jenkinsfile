@@ -16,7 +16,7 @@ node {
 	//Build docker image
 	stage ('Build docker image') {
 	    dir(projectPath) {
-	        sh 'docker build -t sujnanarai/spring-boot-contacts:1.0.0 .'
+	        sh 'docker build -t sujnanarai/spring-boot-contacts:1.0.2 .'
 	    }
 	}
 	//login to docker hub and push image to docker hub
@@ -25,7 +25,7 @@ node {
             sh "docker login -u ${USERNAME} -p ${PASSWORD}"
 	    }
 	    dir(projectPath) {
-	        sh 'docker push sujnanarai/spring-boot-contacts:1.0.0'
+	        sh 'docker push sujnanarai/spring-boot-contacts:1.0.2'
 	    }
 	}
 	stage('Publish test results') {			
@@ -49,7 +49,7 @@ node {
 	
 	//Connects to remote EC2 and run docker image. The docker is already installed in that EC2 instance
 	stage ('Run docker container') {
-	    def dockerRun = 'docker run -p 8080:8080 -d --name sprning-contacts sujnanarai/spring-boot-contacts:1.0.0'
+	    def dockerRun = 'docker run -p 8080:8080 -d --name sprning-contacts sujnanarai/spring-boot-contacts:1.0.2'
 	    sshagent(['EC2_CREDENTIAL']) {
             sh "ssh -o StrictHostKeyChecking=no -T ${EC2_HOST} ${dockerRun}"
         }

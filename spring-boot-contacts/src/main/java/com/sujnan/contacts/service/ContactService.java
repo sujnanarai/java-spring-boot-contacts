@@ -12,7 +12,7 @@ public class ContactService {
 	
 	private List<Contact> contactList = new ArrayList<Contact>();
 	public ContactService() {
-		Contact c1 = new Contact("1", "Sujnana", "Rai", "123456789");
+		Contact c1 = new Contact("1", "Sujnana", "Rai", "123456789", "Bangalore");
 		contactList.add(c1);
 	}
 	
