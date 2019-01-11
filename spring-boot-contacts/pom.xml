@@ -53,7 +53,17 @@
 			</plugin>
 			<!-- This is to fix org.apache.maven.plugins:maven-surefire-plugin error-->
 			<plugin>
-			    <artifactId>maven-surefire-plugin</artifactId>			    
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <!-- Added to fix below error
+			    	[ERROR] Error occurred in starting fork, check output in log
+					[ERROR] Process Exit Code: 1
+					[ERROR] org.apache.maven.surefire.booter.SurefireBooterForkException: The forked VM terminated without properly saying goodbye. VM crash or System.exit called?
+			    -->
+			    <configuration>
+				    <forkCount>3</forkCount>
+				    <reuseForks>true</reuseForks>
+				    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+				 </configuration>			    
 			 </plugin>
 			 
 			 <!--This is for code coverage report-->
