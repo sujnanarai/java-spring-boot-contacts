@@ -1,0 +1,35 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SpringBootContact",
+		"_postman_id": "5aad67b2-d147-36fe-4a0b-6cb98016adb6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ContactList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{appDomain}}/springcontacts/api/v1/contacts",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
